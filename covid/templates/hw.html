@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" 
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+            crossorigin="anonymous">
+    </head>
+    <style>
+        hr.line{
+            border:3px solid red;
+            margin-top:-2%;
+        }
+        #corona:hover{
+            text-shadow: 3px 2px 10px red;
+            box-shadow: 5px 5px 12px red;
+        }
+        #green_s:hover{box-shadow: 5px 5px 12px #25df4f;}
+        #red_s:hover{box-shadow: 5px 5px 12px red ;}
+        #yellow_s:hover{box-shadow: 5px 5px 12px #ffee58}
+        #light_s:hover{box-shadow: 5px 5px 12px #54ddf3}
+        #blue_s:hover{box-shadow: 5px 5px 12px #26a69a}
+        #dif div h5{color : purple;}
+        #dif:hover{box-shadow: 5px 5px 12px pink}
+    </style>
+    <body style="background-color:black;">
+        <div class="jumbotron jumbotron-fluid" style="background-color:black;">  
+            <div class="container " style="background-color:black;">
+                <h1 class="display-4 text-center text-white" id="corona">Covid - 19</h1>
+                <div class="row" style="padding-top: 3%;">
+                    <div style="margin-left:37%;">
+                        <form method="POST" class="align-items-center">
+                            {% csrf_token %}
+                            <select name="selected_country">
+                                {% for country in mylist %}
+                                <option>{{country}}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="submit" class="btn btn-danger" name="submit" style="margin-top: -1%;">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="line">
+        {% if found == 'yes' %}
+        <h1 class="text-center text-white">{{scountry}}</h1>
+        <div class="container-fluid">
+            <div class='row text-center'>
+                <div class="col-md-4">
+                <div class="card m-2" id="dif" style="width: 23rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">New Cases: {{new}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{new}} new cases in {{scountry}}</h6>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-4">
+                <div class="card m-2" id="yellow_s" style="width: 23rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Critical Cases:  {{critical}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{critical}} critical cases in {{scountry}}</h6>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-4">
+                <div class="card m-2" id="red_s" style="width: 23rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Deaths: {{deaths}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{deaths}} deaths in {{scountry}}</h6>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                <div class="card m-2" id="light_s" style="width: 23rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Active Cases: {{active}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{active}} active cases in {{scountry}}</h6>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-4">
+                <div class="card m-2" id="green_s" style="width: 23rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-success" >Recovered: {{recovered}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{recovered}} recovered in {{scountry}}</h6>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-4">
+                <div class="card m-2" id="blue_s" style="width: 23rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-info">Total Cases: {{total}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{total}} total cases in {{scountry}}</h6>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+            <div class="offset-3 col-md-7">
+                <h5 class='text-secondary text-center'>The information regarding the country will be displayed here.</h5>
+            </div>
+        {% endif %}
+    
+    <footer class="alert alert-info p-2" style="margin-top:8%;">
+        <h5 class="text-center">This project is made by Hardik Pachory, for implementing the knowledge of Django</h5>
+    </footer>
+    </body>
+</html>
